@@ -4,7 +4,7 @@
  * @param {number[]} A
  * @return {number}
  */
-var peakIndexInMountainArray = function(A) {
-    let max = Math.max(...A)
-    return A.indexOf(max)
+function peakIndexInMountainArray(A) {
+  let max = Math.max(...A);
+  return A.indexOf(max);
 };

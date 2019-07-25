@@ -5,10 +5,9 @@
  * @return {number[][]}
  */
 
-var flipAndInvertImage = function(array) {
+function flipAndInvertImage(array) {
   return array.reduce((result, current) => {
-      result.push(current.reverse().map(x => x == 0 ? 1 : 0))
-      return result
-  },[])
-  
+    result.push(current.reverse().map(x => (x == 0 ? 1 : 0)));
+    return result;
+  }, []);
 };

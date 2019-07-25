@@ -4,24 +4,24 @@
  * @param {string} moves
  * @return {boolean}
  */
-var judgeCircle = function(moves) {
-    let vertical = 0
-    let horizontal = 0
-    for(x of moves) {
-        switch(x){
-            case "L":
-                vertical --
-                break;
-            case "R":
-                vertical ++
-                break;
-            case "U":
-                horizontal ++
-                break;
-            case "D":
-                horizontal --
-                break;
-        }
+function judgeCircle(moves) {
+  let vertical = 0;
+  let horizontal = 0;
+  for (x of moves) {
+    switch (x) {
+      case 'L':
+        vertical--;
+        break;
+      case 'R':
+        vertical++;
+        break;
+      case 'U':
+        horizontal++;
+        break;
+      case 'D':
+        horizontal--;
+        break;
     }
-    return (vertical === 0 ) && (horizontal === 0)
+  }
+  return vertical === 0 && horizontal === 0;
 };
