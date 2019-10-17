@@ -4,7 +4,7 @@
  * @param {string} s
  * @return {boolean}
  */
-let repeatedSubstringPattern = function(s) {
+function repeatedSubstringPattern(s) {
   if (s.length <= 1) {
     return false;
   }
