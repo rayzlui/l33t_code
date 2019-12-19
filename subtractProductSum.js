@@ -15,3 +15,10 @@ function subtractProductAndSum(n) {
   return product - sum;
 }
 
+//faster
+function subtractProductAndSumII(n) {
+  let array = n.toString().split('');
+  let sum = array.reduce((acc, curr) => acc + curr / 1, 0);
+  let product = array.reduce((acc, curr) => (acc * curr) / 1, 1);
+  return product - sum;
+}
