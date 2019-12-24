@@ -49,3 +49,50 @@ function isValidSudoku(board) {
   }
   return true;
 }
+
+//faster
+
+/**
+ * @param {character[][]} board
+ * @return {boolean}
+ */
+function isValidSudokuII(board) {
+  let rows = {};
+  let columns = {};
+
+  for (let i = 0; i < 3; i++) {
+    for (let j = 0; j < 3; j++) {
+      let check = [];
+      for (let k = 0; k < 3; k++) {
+        for (let l = 0; l < 3; l++) {
+          let value = board[l + 3 * j][k + 3 * i];
+          if (value !== '.') {
+            if (rows[l + 3 * j]) {
+              if (rows[l + 3 * j].includes(value)) {
+                return false;
+              }
+              rows[l + 3 * j].push(value);
+            } else {
+              rows[l + 3 * j] = [value];
+            }
+            if (columns[k + 3 * i]) {
+              if (columns[k + 3 * i].includes(value)) {
+                return false;
+              }
+              columns[k + 3 * i].push(value);
+            } else {
+              columns[k + 3 * i] = [value];
+            }
+          }
+          if (value !== '.') {
+            if (check.includes(value)) {
+              return false;
+            }
+            check.push(value);
+          }
+        }
+      }
+    }
+  }
+  return true;
+}
