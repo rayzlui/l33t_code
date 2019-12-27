@@ -22,3 +22,45 @@ function isPossibleDivide(nums, k) {
   }
   return false;
 }
+
+//faster
+
+/**
+ * @param {number[]} nums
+ * @param {number} k
+ * @return {boolean}
+ */
+function isPossibleDivideII(nums, k) {
+  if (nums.length % k === 0) {
+    let count = nums.reduce((acc, curr) => {
+      if (acc[curr]) {
+        acc[curr]++;
+      } else {
+        acc[curr] = 1;
+      }
+      return acc;
+    }, {});
+    let keys = Object.keys(count);
+    let i = 0;
+    while (keys.length > i) {
+      let start = keys[i];
+      if (count[start]) {
+        count[start]--;
+
+        for (let i = 1; i < k; i++) {
+          let next = start / 1 + i;
+          if (count[next]) {
+            count[next]--;
+          } else {
+            return false;
+          }
+        }
+      } else {
+        i++;
+      }
+    }
+
+    return true;
+  }
+  return false;
+}
