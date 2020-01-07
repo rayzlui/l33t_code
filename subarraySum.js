@@ -28,3 +28,30 @@ function subarraySum(nums, k) {
   }
   return result;
 }
+
+//faster
+
+/**
+ * @param {number[]} nums
+ * @param {number} k
+ * @return {number}
+ */
+function subarraySumII(nums, k) {
+  let values = { 0: 1 };
+  let result = 0;
+  let sum = 0;
+  for (let i = 0; i < nums.length; i++) {
+    sum += nums[i];
+    let diff = sum - k;
+    if (values[diff]) {
+      result += values[diff];
+    }
+    if (values[sum]) {
+      values[sum]++;
+    } else {
+      values[sum] = 1;
+    }
+  }
+
+  return result;
+}
