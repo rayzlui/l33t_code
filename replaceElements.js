@@ -35,3 +35,21 @@ function replaceElementsII(arr) {
     return max;
   });
 };
+
+//fasterer
+/**
+ * @param {number[]} arr
+ * @return {number[]}
+ */
+function replaceElementsIII(arr) {
+  let result = [-1];
+  let max = -Infinity;
+  for (let i = arr.length - 1; i > 0; i--) {
+    let num = arr[i];
+    if (max < num) {
+      max = num;
+    }
+    result.unshift(max);
+  }
+  return result;
+};
