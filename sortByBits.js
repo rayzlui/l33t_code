@@ -23,3 +23,23 @@ function sortByBits(arr) {
   });
 }
 
+//faster
+
+/**
+ * @param {number[]} arr
+ * @return {number[]}
+ */
+
+function sortByBitsII(arr) {
+  let noDups = arr.reduce((acc, curr) => {
+    acc[curr] = bitify(curr);
+    return acc;
+  }, {});
+  return arr.sort((x, y) => {
+    if (noDups[x] === noDups[y]) {
+      return x - y;
+    } else {
+      return noDups[x] - noDups[y];
+    }
+  });
+}
