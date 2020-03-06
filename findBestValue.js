@@ -42,3 +42,37 @@ function findBestValue(arr, target) {
   });
   return Math.abs(target - up) < Math.abs(target - down) ? roundUp : roundDown;
 }
+
+//faster
+
+/**
+ * @param {number[]} arr
+ * @param {number} target
+ * @return {number}
+ */
+function findBestValueII(arr, target) {
+  //divide target by arr.length to get what average should be.
+  //determine which nums are below that and subtract diff
+  //divide by amount below/subtract, add back to average.
+  //check +1/-1 of that average to see which is closer to target
+  let size = arr.length;
+  let orgAverage = target / size;
+  let underAmount = 0;
+  let numberUnder = 0;
+  arr.forEach(x => {
+    if (x < orgAverage) {
+      numberUnder++;
+      underAmount += orgAverage - x;
+    }
+  });
+
+  let overAmount = size - numberUnder;
+  let increaseBy = underAmount / overAmount;
+  let average = orgAverage + increaseBy;
+
+  let roundUp = Math.round(average);
+  let roundDown = Math.floor(average);
+  let up = roundUp * overAmount + (numberUnder * orgAverage - underAmount);
+  let down = roundDown * overAmount + (numberUnder * orgAverage - underAmount);
+  return Math.abs(target - up) < Math.abs(target - down) ? roundUp : roundDown;
+}
