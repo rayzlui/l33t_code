@@ -13,3 +13,14 @@ function search(nums, target) {
   }
   return -1;
 }
+
+//faster
+
+/**
+ * @param {number[]} nums
+ * @param {number} target
+ * @return {number}
+ */
+function searchII(nums, target) {
+  return nums.indexOf(target);
+}
