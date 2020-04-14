@@ -68,3 +68,68 @@ function fullJustify(words, maxWidth) {
   result.push(lastLine);
   return result;
 }
+
+//faster + better memory
+
+/**
+ * @param {string[]} words
+ * @param {number} maxWidth
+ * @return {string[]}
+ */
+
+function spaceCreator(space) {
+  return new Array(space).fill(' ').join('');
+}
+function fullJustifyII(words, maxWidth) {
+  let result = [];
+  let currentWords = [];
+  let currentCount = 0;
+  for (let i = 0; i < words.length; i++) {
+    let word = words[i];
+    let length = word.length;
+    let string = '';
+
+    if (currentCount + length > maxWidth) {
+      if (currentWords.length === 1) {
+        let word = currentWords[0];
+        result.push(word + spaceCreator(maxWidth - word.length));
+      } else {
+        let gaps = maxWidth - (currentCount - currentWords.length);
+        let words = currentWords.length - 1;
+        let space = gaps / words;
+        if (space !== Math.floor(space)) {
+          let atWord = 0;
+          while (space !== Math.floor(space)) {
+            string += currentWords[atWord];
+            string = string + spaceCreator(Math.floor(space) + 1);
+            gaps -= Math.floor(space) + 1;
+            words--;
+            space = gaps / words;
+            atWord++;
+          }
+          for (let j = atWord; j < currentWords.length - 1; j++) {
+            string += currentWords[j];
+            string = string + spaceCreator(space);
+          }
+        } else {
+          for (let k = 0; k < currentWords.length - 1; k++) {
+            string += currentWords[k];
+
+            string = string + spaceCreator(space);
+          }
+        }
+        string += currentWords[currentWords.length - 1];
+        result.push(string);
+      }
+      currentWords = [word];
+      currentCount = length + 1;
+    } else {
+      currentWords.push(word);
+      currentCount += length + 1;
+    }
+  }
+  let lastLine = currentWords.join(' ');
+
+  result.push(lastLine + spaceCreator(maxWidth - lastLine.length));
+  return result;
+}
