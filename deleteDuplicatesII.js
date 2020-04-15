@@ -38,3 +38,42 @@ function deleteDuplicates(head) {
   }, newHead);
   return newHead;
 }
+
+//recursion
+
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val) {
+ *     this.val = val;
+ *     this.next = null;
+ * }
+ */
+/**
+ * @param {ListNode} head
+ * @return {ListNode}
+ */
+function deleteDuplicatesII(head) {
+  if (head === null) {
+    return null;
+  }
+  let seen = {};
+  function recursion(node) {
+    if (seen[node.val]) {
+      seen[node.val]++;
+    } else {
+      seen[node.val] = 1;
+    }
+    if (node.next === null) {
+      return seen[node.val] > 1 ? null : node;
+    }
+    let nextNode = recursion(node.next);
+    if (seen[node.val] > 1) {
+      return nextNode;
+    } else {
+      node.next = nextNode;
+      return node;
+    }
+  }
+
+  return recursion(head);
+}
