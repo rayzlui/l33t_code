@@ -77,3 +77,41 @@ function deleteDuplicatesII(head) {
 
   return recursion(head);
 }
+
+//no hash
+
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val) {
+ *     this.val = val;
+ *     this.next = null;
+ * }
+ */
+/**
+ * @param {ListNode} head
+ * @return {ListNode}
+ */
+function deleteDuplicatesIII(head) {
+  if (head === null) {
+    return null;
+  }
+  function recursion(node) {
+    if (node.next === null) {
+      return [node.val, node];
+    }
+    let nextNode = recursion(node.next);
+    if (nextNode[0] === node.val) {
+      if (nextNode[1]) {
+        return node.val === nextNode[1].val
+          ? [node.val, nextNode[1].next]
+          : [node.val, nextNode[1]];
+      }
+      return [node.val, null];
+    } else {
+      node.next = nextNode[1];
+      return [node.val, node];
+    }
+  }
+
+  return recursion(head)[1];
+}
