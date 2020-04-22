@@ -31,3 +31,34 @@ function detectCycle(head) {
   }
   return null;
 }
+
+//faster
+
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val) {
+ *     this.val = val;
+ *     this.next = null;
+ * }
+ */
+
+/**
+ * @param {ListNode} head
+ * @return {ListNode}
+ */
+function detectCycleII(head) {
+  if (head === null) {
+    return null;
+  }
+  let seen = [];
+  let current = head;
+  while (current) {
+    let index = seen.findIndex(x => x === current);
+    if (index !== -1) {
+      return seen[index];
+    }
+    seen.push(current);
+    current = current.next;
+  }
+  return null;
+}
