@@ -39,3 +39,39 @@ function maxScoreII(s) {
   }
   return max;
 }
+
+//faster!!!!
+
+/**
+ * @param {string} s
+ * @return {number}
+ */
+function maxScoreIII(s) {
+  s = s.split('');
+  let val = s.reduce(
+    (acc, curr, index) => {
+      if (index === 0) {
+        if (curr === '0') {
+          acc[0]++;
+        }
+      } else {
+        if (curr === '1') {
+          acc[1]++;
+        }
+      }
+      return acc;
+    },
+    [0, 0],
+  );
+  let max = val[0] + val[1];
+  for (let i = 1; i < s.length - 1; i++) {
+    let current = s[i];
+    if (current === '0') {
+      val[0]++;
+    } else {
+      val[1]--;
+    }
+    max = Math.max(val[1] + val[0], max);
+  }
+  return max;
+}
