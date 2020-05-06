@@ -34,3 +34,31 @@ function reformat(s) {
       : string;
   return string;
 }
+
+//faster
+
+/**
+ * @param {string} s
+ * @return {string}
+ */
+function reformatII(s) {
+  s = s.split('');
+  let nums = s.filter(x => 0 * (x / 1) === 0);
+  let chars = s.filter(x => 0 * (x / 1) !== 0);
+  if (Math.abs(nums.length - chars.length) > 1) {
+    return '';
+  }
+  let longer = nums.length > chars.length ? nums : chars;
+  let shorter = nums.length > chars.length ? chars : nums;
+
+  let string = '';
+  for (let i = 0; i < longer.length; i++) {
+    string += longer[i];
+    string += shorter[i];
+  }
+  string =
+    shorter.length < longer.length
+      ? string.substr(0, string.length - 9)
+      : string;
+  return string;
+}
