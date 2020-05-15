@@ -77,3 +77,92 @@ function addTwoNumber(l1, l2) {
   }
   return head;
 }
+
+//faster + less memory
+
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val) {
+ *     this.val = val;
+ *     this.next = null;
+ * }
+ */
+/**
+ * @param {ListNode} l1
+ * @param {ListNode} l2
+ * @return {ListNode}
+ */
+function addTwoNumbersII(l1, l2) {
+  let current1 = l1;
+  let current2 = l2;
+  let num1 = [];
+  let num2 = [];
+  while (current1) {
+    num1.push(current1.val);
+    current1 = current1.next;
+  }
+  while (current2) {
+    num2.push(current2.val);
+    current2 = current2.next;
+  }
+  num1 = num1.reverse();
+  num2 = num2.reverse();
+  let sizes = num1.length > num2.length ? [num1, num2] : [num2, num1];
+  let longer = sizes[0];
+  let shorter = sizes[1];
+  let sum = [];
+  let carry = false;
+  for (let i = 0; i < shorter.length; i++) {
+    let curr1 = longer[i];
+    let curr2 = shorter[i];
+    let add = curr1 + curr2;
+    if (carry) {
+      add++;
+    }
+    if (add > 9) {
+      carry = true;
+      sum.push(add % 10);
+    } else {
+      sum.push(add);
+      carry = false;
+    }
+  }
+  let extra = longer.slice(sum.length);
+  if (carry) {
+    if (extra[0] || extra[0] === 0) {
+      extra[0]++;
+      let i = 0;
+      let num = extra[i];
+      while (num > 9) {
+        extra[i] = num % 10;
+        if (extra[i + 1] || extra[i + 1] === 0) {
+          extra[i + 1]++;
+        } else {
+          extra[i + 1] = 1;
+        }
+        i++;
+        num = extra[i];
+      }
+    } else {
+      extra.push(1);
+    }
+  }
+  extra.forEach(x => sum.push(x));
+  sum.reverse();
+  let head = longer === num1 ? l1 : l2;
+  let current = head;
+  for (let i = 0; i < longer.length; i++) {
+    let val = sum[i];
+    if (sum.length > longer.length) {
+      val = sum[i + 1];
+    }
+    current.val = val / 1;
+    current = current.next;
+  }
+  if (sum.length > longer.length) {
+    let freshNode = new ListNode(1);
+    freshNode.next = head;
+    return freshNode;
+  }
+  return head;
+}
