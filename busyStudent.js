@@ -17,3 +17,20 @@ function busyStudent(startTime, endTime, queryTime) {
   }
   return result;
 }
+
+//faster
+
+/**
+ * @param {number[]} startTime
+ * @param {number[]} endTime
+ * @param {number} queryTime
+ * @return {number}
+ */
+function busyStudentII(startTime, endTime, queryTime) {
+  return startTime.reduce((acc, curr, index) => {
+    if (curr <= queryTime && queryTime <= endTime[index]) {
+      acc++;
+    }
+    return acc;
+  }, 0);
+}
