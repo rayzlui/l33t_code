@@ -23,3 +23,24 @@ function finalPrices(prices) {
   }
   return result;
 }
+
+//cleaner
+
+/**
+ * @param {number[]} prices
+ * @return {number[]}
+ */
+function finalPricesII(prices) {
+  let result = [];
+  for (let i = 0; i < prices.length; i++) {
+    let current = prices[i];
+    let remainder = prices.slice(i + 1);
+    let discount = remainder.find(x => x <= current);
+    if (discount) {
+      result.push(current - discount);
+    } else {
+      result.push(current);
+    }
+  }
+  return result;
+}
