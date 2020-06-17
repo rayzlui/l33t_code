@@ -44,3 +44,25 @@ function finalPricesII(prices) {
   }
   return result;
 }
+
+//faster
+
+/**
+ * @param {number[]} prices
+ * @return {number[]}
+ */
+function finalPricesIII(prices) {
+  let result = [];
+  let seen = [];
+  for (let i = prices.length - 1; i >= 0; i--) {
+    let current = prices[i];
+    let discount = seen.find(x => x <= current);
+    if (discount) {
+      result.unshift(current - discount);
+    } else {
+      result.unshift(current);
+    }
+    seen.unshift(current);
+  }
+  return result;
+}
