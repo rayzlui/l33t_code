@@ -24,3 +24,20 @@ function shuffle(nums, n) {
     return acc;
   }, []);
 }
+
+//faster
+
+/**
+ * @param {number[]} nums
+ * @param {number} n
+ * @return {number[]}
+ */
+function shuffleII(nums, n) {
+  let result = [];
+  for (let i = 0; i < n; i++) {
+    for (let j = i; j < nums.length; j += n) {
+      result.push(nums[j]);
+    }
+  }
+  return result;
+}
