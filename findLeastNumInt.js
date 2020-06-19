@@ -22,3 +22,29 @@ function findLeastNumOfUniqueInts(arr, k) {
   }
   return k === 0 ? values.length : values.length + 1;
 }
+
+//faster
+
+/**
+ * @param {number[]} arr
+ * @param {number} k
+ * @return {number}
+ */
+function findLeastNumOfUniqueIntsII(arr, k) {
+  let holder = arr.reduce((acc, curr) => {
+    if (acc[curr]) {
+      acc[curr]++;
+    } else {
+      acc[curr] = 1;
+    }
+    return acc;
+  }, {});
+  arr = arr.sort((x, y) => {
+    if (holder[x] === holder[y]) {
+      return x - y;
+    } else {
+      return holder[x] - holder[y];
+    }
+  });
+  return new Set(arr.slice(k)).size;
+}
