@@ -26,3 +26,23 @@ function getStrongest(arr, k) {
   });
   return keys.slice(0, k).map(x => arr[x]);
 }
+
+//faster
+function getStrongestII(arr, k) {
+  arr.sort((x, y) => x - y);
+  let median =
+    arr.length % 2 === 0
+      ? arr[Math.floor(arr.length) / 2 - 1]
+      : arr[Math.floor(arr.length / 2)];
+
+  return arr
+    .sort((x, y) => {
+      let xMag = Math.abs(x - median);
+      let yMag = Math.abs(y - median);
+      if (xMag === yMag) {
+        return y - x;
+      }
+      return yMag - xMag;
+    })
+    .slice(0, k);
+}
