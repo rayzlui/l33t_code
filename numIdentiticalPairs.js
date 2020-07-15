@@ -29,3 +29,28 @@ function numIdenticalPair(nums) {
     return acc;
   }, 0);
 }
+
+//less memory
+
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+
+function numIdenticalPairs(nums) {
+  let count = nums.reduce((acc, curr) => {
+    if (acc[curr]) {
+      acc[curr]++;
+    } else {
+      acc[curr] = 1;
+    }
+    return acc;
+  }, {});
+  let keys = Object.keys(count);
+  return keys.reduce((acc, curr) => {
+    if (count[curr] > 1) {
+      acc = acc + summation(count[curr]);
+    }
+    return acc;
+  }, 0);
+}
