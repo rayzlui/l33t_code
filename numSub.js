@@ -22,3 +22,24 @@ function numSub(s) {
   }
   return count;
 }
+
+//faster
+
+/**
+ * @param {string} s
+ * @return {number}
+ */
+function summation(x) {
+  let val = 0;
+  for (let i = 1; i <= x; i++) {
+    val += i;
+  }
+  return val;
+}
+function numSubII(s) {
+  let count = 0;
+  s.split('0').forEach(x => {
+    count = (count + summation(x.length)) % (10 ** 9 + 7);
+  });
+  return count;
+}
