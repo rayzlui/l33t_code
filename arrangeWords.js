@@ -45,3 +45,28 @@ function arrangeWordsII(text) {
   }, '');
   return (string[0].toUpperCase() + string.substring(1)).trim();
 }
+
+//faster
+
+/**
+ * @param {string} text
+ * @return {string}
+ */
+function arrangeWordsIII(text) {
+  let arr = text.split(' ').reduce((acc, curr) => {
+    let length = curr.length;
+    if (acc[length]) {
+      acc[length] += ' ' + curr.toLowerCase();
+    } else {
+      acc[length] = curr.toLowerCase();
+    }
+    return acc;
+  }, {});
+  let values = Object.values(arr);
+  let string = values.reduce((acc, curr) => {
+    acc += curr.trim() + ' ';
+
+    return acc;
+  }, '');
+  return (string[0].toUpperCase() + string.substring(1)).trim();
+}
