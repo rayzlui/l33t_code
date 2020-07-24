@@ -29,3 +29,34 @@ function longestDecomposition(text) {
   }
   return count;
 }
+
+//faster
+
+/**
+ * @param {string} text
+ * @return {number}
+ */
+function longestDecompositionII(text) {
+  let count = 0;
+  let frontString = '';
+  let backString = '';
+
+  for (let i = 0; i < text.length / 2; i++) {
+    let frontLetter = text[i];
+    let backLetter = text[text.length - 1 - i];
+    frontString += frontLetter;
+    backString = backLetter + backString;
+    if (frontString === backString) {
+      if (i === Math.floor(text.length / 2)) {
+        return count + 1;
+      }
+      frontString = '';
+      backString = '';
+      count += 2;
+    }
+  }
+  if (frontString.length > 0) {
+    count++;
+  }
+  return count;
+}
