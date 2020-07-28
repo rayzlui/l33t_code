@@ -14,3 +14,18 @@ function countOdds(low, high) {
   }
   return count;
 }
+
+//faster
+
+/**
+ * @param {number} low
+ * @param {number} high
+ * @return {number}
+ */
+function countOddsII(low, high) {
+  let diff = high - low;
+  if (diff % 2 === 1) {
+    return Math.ceil(diff / 2);
+  }
+  return low % 2 === 1 ? diff / 2 + 1 : diff / 2;
+}
