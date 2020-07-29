@@ -69,3 +69,36 @@ function numSplitsII(s) {
   }
   return count;
 }
+
+//fasterer
+/**
+ * @param {string} s
+ * @return {number}
+ */
+function numSplitsIII(s) {
+  let front = new Set();
+  front.add(s[0]);
+  let back = new Set();
+  let counter = {};
+  for (let i = 1; i < s.length; i++) {
+    back.add(s[i]);
+    if (counter[s[i]]) {
+      counter[s[i]]++;
+    } else {
+      counter[s[i]] = 1;
+    }
+  }
+  let count = 0;
+  for (let i = 1; i <= s.length; i++) {
+    if (front.size === back.size) {
+      count++;
+    }
+    let curr = s[i];
+    front.add(curr);
+    counter[curr]--;
+    if (counter[curr] === 0) {
+      back.delete(curr);
+    }
+  }
+  return count;
+}
