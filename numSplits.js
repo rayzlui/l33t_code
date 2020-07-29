@@ -34,3 +34,38 @@ function numSplits(s) {
   }
   return count;
 }
+
+//faster
+
+/**
+ * @param {string} s
+ * @return {number}
+ */
+function numSplitsII(s) {
+  let arr = s.split('');
+  let front = new Set();
+  front.add(arr.shift());
+  let back = new Set();
+  let counter = arr.reduce((acc, curr) => {
+    if (acc[curr]) {
+      acc[curr]++;
+    } else {
+      acc[curr] = 1;
+    }
+    back.add(curr);
+    return acc;
+  }, {});
+  let count = 0;
+  for (let i = 1; i <= s.length; i++) {
+    if (front.size === back.size) {
+      count++;
+    }
+    let curr = s[i];
+    front.add(curr);
+    counter[curr]--;
+    if (counter[curr] === 0) {
+      back.delete(curr);
+    }
+  }
+  return count;
+}
