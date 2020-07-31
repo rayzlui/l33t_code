@@ -21,3 +21,31 @@ function numOfSubarrays(arr) {
   }
   return count;
 }
+
+//faster
+
+/**
+ * @param {number[]} arr
+ * @return {number}
+ */
+function numOfSubarraysII(arr) {
+  let count = 0;
+  let odds = 0;
+  let evens = 0;
+  for (let i = 0; i < arr.length; i++) {
+    let num = arr[i];
+    if (num % 2 === 1) {
+      count++;
+      count += evens;
+      let temp = evens;
+      evens = odds;
+      odds = temp;
+      odds++;
+    } else {
+      count += odds;
+      evens++;
+    }
+    count = count % (10 ** 9 + 7);
+  }
+  return count;
+}
