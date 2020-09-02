@@ -31,3 +31,21 @@ function maxCoinsII(piles) {
     return acc;
   }, 0);
 }
+
+//faster
+
+/**
+ * @param {number[]} piles
+ * @return {number}
+ */
+function maxCoinsIII(piles) {
+  piles = piles.sort((x, y) => y - x);
+  let stop = (piles.length / 3) * 2;
+  let max = 0;
+  for (let i = 0; i < stop; i++) {
+    if (i % 2 === 1) {
+      max += piles[i];
+    }
+  }
+  return max;
+}
