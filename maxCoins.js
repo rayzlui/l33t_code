@@ -15,3 +15,19 @@ function maxCoins(piles) {
   }
   return max;
 }
+
+//faster
+
+/**
+ * @param {number[]} piles
+ * @return {number}
+ */
+function maxCoinsII(piles) {
+  piles = piles.sort((x, y) => y - x).slice(0, (piles.length / 3) * 2);
+  return piles.reduce((acc, curr, index) => {
+    if (index % 2 === 1) {
+      acc += curr;
+    }
+    return acc;
+  }, 0);
+}
