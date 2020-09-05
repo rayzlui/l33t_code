@@ -35,3 +35,19 @@ function findSmallestSetOfVertices(n, edges) {
   }
   return result;
 }
+
+//faster
+
+/**
+ * @param {number} n
+ * @param {number[][]} edges
+ * @return {number[]}
+ */
+function findSmallestSetOfVerticesII(n, edges) {
+  let result = new Array(n).fill(0).map((x, index) => index);
+  for (let i = 0; i < edges.length; i++) {
+    let end = edges[i][1];
+    result[end] = 'remove';
+  }
+  return result.filter(x => x !== 'remove');
+}
