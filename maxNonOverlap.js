@@ -29,3 +29,27 @@ function maxNonOverlapping(nums, target) {
   }
   return result;
 }
+
+//faster
+
+/**
+ * @param {number[]} nums
+ * @param {number} target
+ * @return {number}
+ */
+function maxNonOverlappingII(nums, target) {
+  let presum = {};
+  let sum = 0;
+  let result = 0;
+  nums.forEach(x => {
+    sum += x;
+    if (presum[sum - target] || sum === target) {
+      result++;
+      sum = 0;
+      presum = {};
+    } else {
+      presum[sum] = true;
+    }
+  });
+  return result;
+}
