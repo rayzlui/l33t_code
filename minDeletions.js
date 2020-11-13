@@ -32,3 +32,39 @@ function minDeletions(s) {
   }
   return removed;
 }
+
+//faster
+
+/**
+ * @param {string} s
+ * @return {number}
+ */
+let alphabet = 'abcdefghijklmnopqrstuvwxyz'
+  .split('')
+  .reduce((acc, curr, index) => {
+    acc[curr] = index;
+    return acc;
+  }, {});
+function minDeletionsII(s) {
+  let count = new Array(26).fill(0);
+  for (let i = 0; i < s.length; i++) {
+    let letter = s[i];
+    count[alphabet[letter]]++;
+  }
+  let values = count.sort((x, y) => y - x);
+  let removed = 0;
+  for (let i = 0; i < values.length - 1; i++) {
+    let first = values[i];
+    let second = values[i + 1];
+    if (first === 0) {
+      removed += second;
+      values[i + 1] = 0;
+    } else {
+      if (first <= second) {
+        removed += second - first + 1;
+        values[i + 1] = first - 1;
+      }
+    }
+  }
+  return removed;
+}
