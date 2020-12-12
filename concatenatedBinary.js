@@ -14,3 +14,34 @@ function concatenatedBinary(n) {
 
   return num;
 }
+
+//faster
+
+/**
+ * @param {number} n
+ * @return {number}
+ */
+function binaryUpTo(n) {
+  let result = {};
+  let start = 1;
+  while (start < n) {
+    result[start] = true;
+    start *= 2;
+  }
+  return result;
+}
+
+const binariesUpTo100000 = binaryUpTo(100000);
+function concatenatedBinaryII(n) {
+  let num = 1;
+  const MOD = 10 ** 9 + 7;
+  let binaryLength = 1;
+  for (let i = 2; i <= n; i++) {
+    if (binariesUpTo100000[i]) {
+      binaryLength++;
+    }
+    num = (num * 2 ** binaryLength + i) % MOD;
+  }
+
+  return num;
+}
