@@ -38,3 +38,33 @@ function maximumBinaryString(binary) {
     return result;
   }
 }
+
+//faster
+
+/**
+ * @param {string} binary
+ * @return {string}
+ */
+function maximumBinaryStringII(binary) {
+  //check from 00 from left, if not, check if 10 in next
+  //as long as there's a zero after current 0, we can add 1.
+  //break point or 'last zero' is at the 0 where's there's only 1 zero left behind it.
+  binary = binary.split('');
+  let left = 0;
+  let right = 1;
+  while (right < binary.length) {
+    if (binary[left] === '1') {
+      left++;
+      right = right <= left ? left + 1 : right;
+    } else {
+      if (binary[right] === '0') {
+        binary[left] = '1';
+        binary[right] = '1';
+        binary[left + 1] = '0';
+      } else {
+        right++;
+      }
+    }
+  }
+  return binary.join('');
+}
