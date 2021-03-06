@@ -156,3 +156,32 @@ function largestMerge(word1, word2) {
   }
   return merge;
 }
+
+//faster
+
+/**
+ * @param {string} word1
+ * @param {string} word2
+ * @return {string}
+ */
+
+function largestMergeII(word1, word2) {
+  let merge = '';
+  while (word1.length && word2.length) {
+    if (word1 > word2) {
+      merge += word1.substring(0, 1);
+      word1 = word1.substring(1);
+    } else {
+      merge += word2.substring(0, 1);
+      word2 = word2.substring(1);
+    }
+  }
+  if (word1.length > 0) {
+    merge += word1;
+  }
+  if (word2.length > 0) {
+    merge += word2;
+  }
+
+  return merge;
+}
