@@ -28,3 +28,31 @@ function canBeTypedWords(text, brokenLetters) {
   }
   return wordNum - invalidWords.size;
 }
+
+//faster
+
+/**
+ * @param {string} text
+ * @param {string} brokenLetters
+ * @return {number}
+ */
+function canBeTypedWordsII(text, brokenLetters) {
+  let holder = {};
+  let wordNum = 1;
+  let invalidWords = new Set();
+  for (let i = 0; i < brokenLetters.length; i++) {
+    let invalidLetter = brokenLetters[i];
+    holder[invalidLetter] = true;
+  }
+  for (let i = 0; i < text.length; i++) {
+    let current = text[i];
+    if (current === ' ') {
+      wordNum++;
+    } else {
+      if (holder[current]) {
+        invalidWords.add(wordNum);
+      }
+    }
+  }
+  return wordNum - invalidWords.size;
+}
